@@ -1,0 +1,71 @@
+﻿@using OmniScanMRI.WebApp.Models
+@model AppointmentBooking
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Book Appointment";
+}
+
+@using (Html.BeginForm("BookAppointment", "Appointment", FormMethod.Post, new { @class = "appointment-form" }))
+{
+   
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.FirstName)
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateOfBirth)
+        @Html.EditorFor(m => m.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.AppointmentReason)
+        @Html.TextAreaFor(m => m.AppointmentReason, new { @class = "form-control", @rows = 3 })
+        @Html.ValidationMessageFor(m => m.AppointmentReason, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DoctorId)
+        @Html.DropDownListFor(m => m.DoctorId, (SelectList)ViewBag.Doctors, "Select a Doctor", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DoctorId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.AppointmentDateTime)
+        @Html.TextBoxFor(m => m.AppointmentDateTime, new { @type = "datetime-local", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AppointmentDateTime, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Make Appointment</button>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1900:2100"
+        });
+    });
+</script>
